@@ -3,6 +3,7 @@ import { CATEGORIES } from '../../data';
 import { Shell } from '../Shell';
 import { Banner } from './Banner/Banner';
 import { CategoriesList } from './CategoriesList/CategoriesList';
+import { DefaultMantineLogo, DefaultMatineHeaderContent } from '../Shell/Shell';
 
 interface HomePageProps {
   componentsCountByCategory: Record<string, number>;
@@ -15,7 +16,7 @@ export function HomePage({ componentsCountByCategory }: HomePageProps) {
   );
 
   return (
-    <Shell>
+    <Shell logo={<DefaultMantineLogo/>} header={<DefaultMatineHeaderContent/>}>
       <Head>
         <title>Mantine UI</title>
       </Head>

@@ -12,28 +12,39 @@ import classes from './Shell.module.css';
 
 interface ShellProps {
   children: React.ReactNode;
+  header: React.ReactNode;
+  logo: React.ReactNode;
 }
 
-export function Shell({ children }: ShellProps) {
+const DefaultMatineHeaderContent = () => <>
+  <HeaderControls
+    visibleFrom="sm"
+    onSearch={searchHandlers.open}
+    githubLink={meta.gitHubLinks.mantineUi}
+    withDirectionToggle={false}
+  />
+
+  <Group hiddenFrom="sm">
+    <SearchMobileControl onSearch={searchHandlers.open} />
+    <ColorSchemeControl />
+  </Group>
+</>
+
+const DefaultMantineLogo = () => <MantineLogo variant="ui.mantine.dev" size={30} />
+
+export function Shell({
+   children, 
+  header = <div></div>, 
+  logo = <div></div>
+  }: ShellProps) {
   return (
     <AppShell header={{ height: 60 }}>
       <AppShell.Header className={RemoveScroll.classNames.zeroRight}>
         <Container size="xl" px="md" className={classes.inner}>
-          <Link href="/" className="mantine-focus-auto">
-            <MantineLogo variant="ui.mantine.dev" size={30} />
+          <Link href="/" className={`mantine-focus-auto ${classes.link}`}>
+            {logo}
           </Link>
-
-          <HeaderControls
-            visibleFrom="sm"
-            onSearch={searchHandlers.open}
-            githubLink={meta.gitHubLinks.mantineUi}
-            withDirectionToggle={false}
-          />
-
-          <Group hiddenFrom="sm">
-            <SearchMobileControl onSearch={searchHandlers.open} />
-            <ColorSchemeControl />
-          </Group>
+          {header}
         </Container>
       </AppShell.Header>
       <AppShell.Main>
@@ -42,3 +53,5 @@ export function Shell({ children }: ShellProps) {
     </AppShell>
   );
 }
+
+export { DefaultMatineHeaderContent, DefaultMantineLogo }
