@@ -1,8 +1,9 @@
 import { Shell } from "@/components/Shell";
-import { Group, Title, Image } from "@mantine/core";
+import { Group, Title, Image, rem } from "@mantine/core";
 import Head from "next/head";
 import classes from './HomePage.module.css'
 import { links } from "@/iMedia/utils/conts";
+import { Banner } from "@/components/HomePage/Banner/Banner";
 
 interface NavItemProps {
     links: { link: string; label: string }[];
@@ -34,10 +35,11 @@ const LogoName = () => <Group>
 
 export function HomePage() {
     return (
-        <Shell logo={<LogoName />} header={<NavItem links={links} />}>
+        <Shell logo={<LogoName />} header={<NavItem links={links} />} headerHeight={80}>
             <Head>
                 <title>iMedia</title>
             </Head>
+            {/* <Banner componentsCount={2} /> */}
         </Shell>
     )
 }

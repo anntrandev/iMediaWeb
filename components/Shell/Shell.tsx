@@ -14,6 +14,7 @@ interface ShellProps {
   children: React.ReactNode;
   header: React.ReactNode;
   logo: React.ReactNode;
+  headerHeight?: number;
 }
 
 const DefaultMatineHeaderContent = () => <>
@@ -33,12 +34,13 @@ const DefaultMatineHeaderContent = () => <>
 const DefaultMantineLogo = () => <MantineLogo variant="ui.mantine.dev" size={30} />
 
 export function Shell({
-   children, 
+  children, 
   header = <div></div>, 
-  logo = <div></div>
+  logo = <div></div>,
+  headerHeight = 60
   }: ShellProps) {
   return (
-    <AppShell header={{ height: 60 }}>
+    <AppShell header={{ height: headerHeight }}>
       <AppShell.Header className={RemoveScroll.classNames.zeroRight}>
         <Container size="xl" px="md" className={classes.inner}>
           <Link href="/" className={`mantine-focus-auto ${classes.link}`}>

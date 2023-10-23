@@ -19,12 +19,13 @@ import classes from './Banner.module.css';
 
 interface BannerProps {
   componentsCount: number;
+  features?: React.ReactNode[],
+  controls?: React.ReactNode[],
+
 }
 
-export function Banner({ componentsCount }: BannerProps) {
-  const [, scrollTo] = useWindowScroll();
-
-  const features = data.map((feature) => (
+const DefaultMantineFeatures = () => (
+  data.map((feature) => (
     <div key={feature.title}>
       <ThemeIcon className={classes.featureIcon} size={44} radius="md">
         <feature.icon style={{ width: rem(24), height: rem(24) }} stroke={1.5} />
@@ -35,7 +36,39 @@ export function Banner({ componentsCount }: BannerProps) {
         <Text className={classes.featureDescription}>{feature.description}</Text>
       </div>
     </div>
-  ));
+  ))
+)
+
+const DefaultMantineControls = () => {
+  const [, scrollTo] = useWindowScroll();
+
+  return <>
+    <Button
+      className={cx(classes.control, classes.controlMain)}
+      onClick={() => { scrollTo({y: 700})}}
+    >
+      Browse components
+    </Button>
+    <Button
+      className={cx(classes.control, classes.controlSecondary)}
+      leftSection={<GithubIcon size="1rem" />}
+      component="a"
+      href="https://github.com/mantinedev/ui.mantine.dev"
+    >
+      GitHub
+    </Button>
+    <Button
+      className={cx(classes.control, classes.controlSecondary)}
+      rightSection={<IconExternalLink size="1rem" stroke={1.5} />}
+      component="a"
+      href="https://mantine.dev/getting-started/"
+    >
+      Get started with Mantine
+    </Button>
+  </>
+}
+
+export function Banner({ componentsCount, features = [], controls }: BannerProps) {
 
   return (
     <div className={classes.wrapper}>
@@ -94,3 +127,5 @@ export function Banner({ componentsCount }: BannerProps) {
     </div>
   );
 }
+
+export { DefaultMantineFeatures }
