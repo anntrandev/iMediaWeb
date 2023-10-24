@@ -14,31 +14,35 @@ interface ShellProps {
   children: React.ReactNode;
   header: React.ReactNode;
   logo: React.ReactNode;
+  footer: React.ReactNode;
   headerHeight?: number;
 }
 
-const DefaultMatineHeaderContent = () => <>
-  <HeaderControls
-    visibleFrom="sm"
-    onSearch={searchHandlers.open}
-    githubLink={meta.gitHubLinks.mantineUi}
-    withDirectionToggle={false}
-  />
+const DefaultMatineHeaderContent = () => (
+  <>
+    <HeaderControls
+      visibleFrom="sm"
+      onSearch={searchHandlers.open}
+      githubLink={meta.gitHubLinks.mantineUi}
+      withDirectionToggle={false}
+    />
 
-  <Group hiddenFrom="sm">
-    <SearchMobileControl onSearch={searchHandlers.open} />
-    <ColorSchemeControl />
-  </Group>
-</>
+    <Group hiddenFrom="sm">
+      <SearchMobileControl onSearch={searchHandlers.open} />
+      <ColorSchemeControl />
+    </Group>
+  </>
+);
 
-const DefaultMantineLogo = () => <MantineLogo variant="ui.mantine.dev" size={30} />
+const DefaultMantineLogo = () => <MantineLogo variant="ui.mantine.dev" size={30} />;
 
 export function Shell({
-  children, 
-  header = <div></div>, 
-  logo = <div></div>,
-  headerHeight = 60
-  }: ShellProps) {
+  children,
+  header = <div />,
+  logo = <div />,
+  footer = <div />,
+  headerHeight = 60,
+}: ShellProps) {
   return (
     <AppShell header={{ height: headerHeight }}>
       <AppShell.Header className={RemoveScroll.classNames.zeroRight}>
@@ -52,8 +56,9 @@ export function Shell({
       <AppShell.Main>
         <div className={classes.main}>{children}</div>
       </AppShell.Main>
+      <AppShell.Footer>{footer}</AppShell.Footer>
     </AppShell>
   );
 }
 
-export { DefaultMatineHeaderContent, DefaultMantineLogo }
+export { DefaultMatineHeaderContent, DefaultMantineLogo };

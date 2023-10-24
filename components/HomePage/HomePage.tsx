@@ -16,7 +16,7 @@ export function HomePage({ componentsCountByCategory }: HomePageProps) {
   );
 
   return (
-    <Shell logo={<DefaultMantineLogo/>} header={<DefaultMatineHeaderContent/>}>
+    <Shell logo={<DefaultMantineLogo />} header={<DefaultMatineHeaderContent />}>
       <Head>
         <title>Mantine UI</title>
       </Head>

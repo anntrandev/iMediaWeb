@@ -19,12 +19,12 @@ import classes from './Banner.module.css';
 
 interface BannerProps {
   componentsCount: number;
-  features?: React.ReactNode[],
-  controls?: React.ReactNode[],
-
+  image: string;
+  features?: React.ReactNode[];
+  controls?: React.ReactNode[];
 }
 
-const DefaultMantineFeatures = () => (
+const DefaultMantineFeatures = () =>
   data.map((feature) => (
     <div key={feature.title}>
       <ThemeIcon className={classes.featureIcon} size={44} radius="md">
@@ -36,96 +36,105 @@ const DefaultMantineFeatures = () => (
         <Text className={classes.featureDescription}>{feature.description}</Text>
       </div>
     </div>
-  ))
-)
+  ));
 
 const DefaultMantineControls = () => {
   const [, scrollTo] = useWindowScroll();
 
-  return <>
-    <Button
-      className={cx(classes.control, classes.controlMain)}
-      onClick={() => { scrollTo({y: 700})}}
-    >
-      Browse components
-    </Button>
-    <Button
-      className={cx(classes.control, classes.controlSecondary)}
-      leftSection={<GithubIcon size="1rem" />}
-      component="a"
-      href="https://github.com/mantinedev/ui.mantine.dev"
-    >
-      GitHub
-    </Button>
-    <Button
-      className={cx(classes.control, classes.controlSecondary)}
-      rightSection={<IconExternalLink size="1rem" stroke={1.5} />}
-      component="a"
-      href="https://mantine.dev/getting-started/"
-    >
-      Get started with Mantine
-    </Button>
-  </>
-}
+  return (
+    <>
+      <Button
+        className={cx(classes.control, classes.controlMain)}
+        onClick={() => {
+          scrollTo({ y: 700 });
+        }}
+      >
+        Browse components
+      </Button>
+      <Button
+        className={cx(classes.control, classes.controlSecondary)}
+        leftSection={<GithubIcon size="1rem" />}
+        component="a"
+        href="https://github.com/mantinedev/ui.mantine.dev"
+      >
+        GitHub
+      </Button>
+      <Button
+        className={cx(classes.control, classes.controlSecondary)}
+        rightSection={<IconExternalLink size="1rem" stroke={1.5} />}
+        component="a"
+        href="https://mantine.dev/getting-started/"
+      >
+        Get started with Mantine
+      </Button>
+    </>
+  );
+};
 
-export function Banner({ componentsCount, features = [], controls }: BannerProps) {
-
+export function Banner({
+  componentsCount,
+  features = [],
+  controls,
+  image = bannerImage.src,
+}: BannerProps) {
   return (
     <div className={classes.wrapper}>
       <Container size="xl" px="md">
-        <div className={classes.image} style={{ backgroundImage: `url(${bannerImage.src})` }} />
-        <Overlay className={classes.overlay} opacity={1} zIndex={1} />
-
         <div className={classes.body}>
-          <Text className={classes.supTitle}>Mantine UI</Text>
-          <Title className={classes.title}>
-            <span className={classes.highlight}>{componentsCount} responsive components</span>
-            <br /> built with Mantine
-          </Title>
+          <div className={classes.image} style={{ backgroundImage: `url(${image})` }} />
+          <Overlay className={classes.overlay} opacity={1} zIndex={1} />
 
-          <Text className={classes.description}>
-            Build your next website even faster with premade responsive components designed and
-            built by Mantine maintainers and community. All components are free forever for
-            everyone.
-          </Text>
+          <div className={classes.body}>
+            <Text className={classes.supTitle}>Mantine UI</Text>
+            <Title className={classes.title}>
+              <span className={classes.highlight}>{componentsCount} responsive components</span>
+              <br /> built with Mantine
+            </Title>
 
-          <Group className={classes.controls}>
-            <Button
-              className={cx(classes.control, classes.controlMain)}
-              onClick={() => scrollTo({ y: 700 })}
-            >
-              Browse components
-            </Button>
-            <Button
-              className={cx(classes.control, classes.controlSecondary)}
-              leftSection={<GithubIcon size="1rem" />}
-              component="a"
-              href="https://github.com/mantinedev/ui.mantine.dev"
-            >
-              GitHub
-            </Button>
-            <Button
-              className={cx(classes.control, classes.controlSecondary)}
-              rightSection={<IconExternalLink size="1rem" stroke={1.5} />}
-              component="a"
-              href="https://mantine.dev/getting-started/"
-            >
-              Get started with Mantine
-            </Button>
-          </Group>
+            <Text className={classes.description}>
+              Build your next website even faster with premade responsive components designed and
+              built by Mantine maintainers and community. All components are free forever for
+              everyone.
+            </Text>
 
-          <SimpleGrid
-            cols={{ base: 1, sm: 3 }}
-            spacing={{ base: 'lg', sm: 'xl' }}
-            className={classes.features}
-            mt={100}
-          >
-            {features}
-          </SimpleGrid>
+            <Group className={classes.controls}>
+              <Button
+                className={cx(classes.control, classes.controlMain)}
+                onClick={() => scrollTo({ y: 700 })}
+              >
+                Browse components
+              </Button>
+              <Button
+                className={cx(classes.control, classes.controlSecondary)}
+                leftSection={<GithubIcon size="1rem" />}
+                component="a"
+                href="https://github.com/mantinedev/ui.mantine.dev"
+              >
+                GitHub
+              </Button>
+              <Button
+                className={cx(classes.control, classes.controlSecondary)}
+                rightSection={<IconExternalLink size="1rem" stroke={1.5} />}
+                component="a"
+                href="https://mantine.dev/getting-started/"
+              >
+                Get started with Mantine
+              </Button>
+            </Group>
+
+            <SimpleGrid
+              cols={{ base: 1, sm: 3 }}
+              spacing={{ base: 'lg', sm: 'xl' }}
+              className={classes.features}
+              mt={100}
+            >
+              {features}
+            </SimpleGrid>
+          </div>
         </div>
       </Container>
     </div>
   );
 }
 
-export { DefaultMantineFeatures }
+export { DefaultMantineFeatures };
