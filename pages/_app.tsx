@@ -7,9 +7,6 @@ import '@mantine/spotlight/styles.css';
 import '@mantine/ds/styles.css';
 import Head from 'next/head';
 import { MantineProvider, DirectionProvider, localStorageColorSchemeManager } from '@mantine/core';
-import { HotKeysHandler } from '@/components/HotKeysHandler';
-import { Search } from '@/components/Search';
-import { GaScript } from '@/components/GaScript';
 import { theme } from '../theme';
 
 export default function App({ Component, pageProps }: any) {
@@ -32,17 +29,13 @@ export default function App({ Component, pageProps }: any) {
           content="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/social-preview.png"
         />
       </Head>
-      <GaScript />
-
       <DirectionProvider initialDirection="ltr" detectDirection={false}>
         <MantineProvider
           theme={theme}
           defaultColorScheme="auto"
           colorSchemeManager={localStorageColorSchemeManager({ key: 'mantine-ui-color-scheme' })}
         >
-          <HotKeysHandler />
           <Component {...pageProps} />
-          <Search data={pageProps.allComponents} />
         </MantineProvider>
       </DirectionProvider>
     </>

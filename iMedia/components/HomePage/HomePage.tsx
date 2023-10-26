@@ -6,7 +6,7 @@ import { Shell } from '../Shell/Shell';
 
 export function HomePage() {
   return (
-    <Shell headerHeight={80} footer={<div />}>
+    <Shell headerHeight={80}>
       <Head>
         <title>iMedia</title>
       </Head>

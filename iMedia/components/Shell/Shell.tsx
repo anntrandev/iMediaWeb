@@ -11,10 +11,10 @@ import {
   rem,
   ActionIcon,
 } from '@mantine/core';
+import { IconBrandInstagram, IconBrandTwitter, IconBrandYoutube } from '@tabler/icons-react';
 import classes from './Shell.module.css';
 import { links } from '@/iMedia/utils/conts';
 import bgImage from '@/iMedia/resources/imgs/background.png';
-import { IconBrandInstagram, IconBrandTwitter, IconBrandYoutube } from '@tabler/icons-react';
 
 interface ShellProps {
   children: React.ReactNode;
