@@ -1,8 +1,8 @@
 {
   "releaseVersion": [
     {
-      "title": "Phiên bản Smart TV",
-      "version": "Version: abc.xyz",
+      "title": "Phiên bản Android TV",
+      "version": "Version: abc.xyz.123",
       "descriptionGG": "Phiên bản hỗ trợ xem truyền hình và radio phù hợp với các thiết bị smart TV",
       "linkGG": "https://play.google.com/store/apps/details?id=com.kt.apps.media.xemtv",
       "descriptionAPK": "Phiên bản nâng cao hỗ trợ xem bóng đá và IPTV",
@@ -11,7 +11,7 @@
     },
     {
       "title": "Phiên bản Điện thoại",
-      "version": "Version: abc.xyz",
+      "version": "Version: abc.xyz.123",
       "descriptionGG": "Phiên bản hỗ trợ xem truyền hình và radio phù hợp với các thiết bị Điện thoại, Tablet, Android Auto",
       "linkGG": "https://play.google.com/store/apps/details?id=com.kt.apps.media.mobile.xemtv",
       "descriptionAPK": "Phiên bản nâng cao hỗ trợ xem bóng đá và IPTV",

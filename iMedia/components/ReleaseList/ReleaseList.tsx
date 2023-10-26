@@ -1,25 +1,57 @@
-import { Container, SimpleGrid, Title, Text } from '@mantine/core';
-import { useEffect, useMemo, useState } from 'react';
+import { Container, SimpleGrid } from '@mantine/core';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import classes from './Release.module.css';
 import { IReleaseData, ReleaseCard } from '../ReleaseCard/ReleaseCard';
 import resource from '@/iMedia/resources/data.json';
+import { remoteConfig } from '@/iMedia/utils/initFirebase';
+import { getString, getValue } from 'firebase/remote-config';
+import { AppContext } from '@/iMedia/components/HomePage/HomePage';
+
+interface SocialData {
+  link: string;
+}
+interface ConfigData {
+  releaseVersion: {
+    title: string;
+    version: string;
+    descriptionGG: string;
+    linkGG: string;
+    descriptionAPK: string;
+    linkAPK: string;
+    type: string;
+  }[];
+  social: {
+    facebook: SocialData;
+    zalo: SocialData;
+    mail: SocialData;
+  };
+  iptv: {
+    title: string;
+    links: string[];
+  }[];
+}
 
 export function ReleaseList() {
+  const { isLoadedConfig } = useContext(AppContext);
   const [data, setData] = useState<IReleaseData[]>([]);
 
   const releaseList = useMemo(() => data.map((v) => <ReleaseCard data={v} />), [data]);
 
   useEffect(() => {
-    const mappedData: IReleaseData[] = resource.releaseVersion.map((v) => ({
-      title: v.title,
-      descriptionGG: v.descriptionGG,
-      descriptionAPK: v.descriptionAPK,
-      linkGG: v.linkGG,
-      linkAPK: v.linkAPK,
-      version: v.version,
-    }));
-    setData(mappedData);
-  }, []);
+    if (remoteConfig) {
+      const value = getString(remoteConfig, 'web_config');
+      const parsedObj: ConfigData = JSON.parse(value);
+      const mappedData: IReleaseData[] = parsedObj.releaseVersion.map((v) => ({
+        title: v.title,
+        descriptionGG: v.descriptionGG,
+        descriptionAPK: v.descriptionAPK,
+        linkGG: v.linkGG,
+        linkAPK: v.linkAPK,
+        version: v.version,
+      }));
+      setData(mappedData);
+    }
+  }, [isLoadedConfig]);
 
   return (
     <Container size="xl" px="md" className={classes.wrapper}>

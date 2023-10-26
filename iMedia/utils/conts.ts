@@ -9,4 +9,4 @@ const links: { link: string; label: string }[] = [
   },
 ];
 
-export { links }
+export { links };
