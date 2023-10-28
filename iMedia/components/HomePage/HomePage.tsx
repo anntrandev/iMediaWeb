@@ -1,30 +1,26 @@
 import Head from 'next/head';
 import { createContext, useEffect, useState } from 'react';
-import { fetchAndActivate } from 'firebase/remote-config';
 import bannerImage from './tv.png';
 import { Banner } from '../Banner/Banner';
 import { ReleaseList } from '../ReleaseList/ReleaseList';
 import { Shell } from '../Shell/Shell';
-import { remoteConfig } from '@/iMedia/utils/initFirebase';
+import useLoadConfig from './useLoadConfig';
+import { ConfigData } from '@/iMedia/models';
 
-const AppContext = createContext({
-  isLoadedConfig: false,
+interface IAppContext {
+  configData: ConfigData | undefined
+}
+
+const AppContext = createContext<IAppContext>({
+  configData: undefined,
 });
 
 export function HomePage() {
-  const [isLoadedConfig, setIsLoadedConfig] = useState(false);
-  useEffect(() => {
-    if (remoteConfig) {
-      fetchAndActivate(remoteConfig)
-        .then(() => {
-          setIsLoadedConfig(true);
-        })
-        .catch(() => {});
-    }
-  }, []);
+  const { configData } = useLoadConfig();
+
   return (
-    <Shell headerHeight={80}>
-      <AppContext.Provider value={{ isLoadedConfig }}>
+    <AppContext.Provider value={{ configData }}>
+      <Shell headerHeight={80}>
         <Head>
           <title>iMedia</title>
         </Head>
@@ -32,8 +28,8 @@ export function HomePage() {
         <div id="main">
           <ReleaseList />
         </div>
-      </AppContext.Provider>
-    </Shell>
+      </Shell>
+    </AppContext.Provider>
   );
 }
 

@@ -15,6 +15,7 @@ import { IconBrandInstagram, IconBrandTwitter, IconBrandYoutube } from '@tabler/
 import classes from './Shell.module.css';
 import { links } from '@/iMedia/utils/conts';
 import bgImage from '@/iMedia/resources/imgs/background.png';
+import { Footer } from '../Footer/Footer';
 
 interface ShellProps {
   children: React.ReactNode;
@@ -69,25 +70,9 @@ export function Shell({ children, headerHeight = 60 }: ShellProps) {
           <div className={classes.main}>{children}</div>
         </AppShell.Main>
       </BackgroundImage>
-
       <Container>
-        <Space h={rem(200)} />
-        <div className={classes.footer}>
-          <Container className={classes.innerFooter}>
-            <LogoName />
-            <Group gap={0} className={classes.linksFooter} justify="flex-end" wrap="nowrap">
-              <ActionIcon size="lg" color="gray" variant="subtle">
-                <IconBrandTwitter style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
-              </ActionIcon>
-              <ActionIcon size="lg" color="gray" variant="subtle">
-                <IconBrandYoutube style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
-              </ActionIcon>
-              <ActionIcon size="lg" color="gray" variant="subtle">
-                <IconBrandInstagram style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
-              </ActionIcon>
-            </Group>
-          </Container>
-        </div>
+        <Footer />
+        {/* <Space h={rem(200)} style={{zIndex: 0, pointerEvents: 'none'}}/> */}
       </Container>
     </AppShell>
   );
