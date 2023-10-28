@@ -1,10 +1,10 @@
 const links: { link: string; label: string }[] = [
   {
-    link: './iptv',
+    link: '/iptv',
     label: 'IPTV',
   },
   {
-    link: ' ./release',
+    link: '/release',
     label: 'Download',
   },
 ];

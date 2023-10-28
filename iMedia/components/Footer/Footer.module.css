@@ -2,11 +2,6 @@
     /* margin-top: rem(120px); */
     /* border-top: rem(1px) solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5)); */
     height: rem(200px);
-    position: relative;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 0;
 }
 
 .innerFooter {

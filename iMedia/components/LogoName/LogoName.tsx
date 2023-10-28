@@ -1,10 +1,12 @@
-import { Group, Title, Image } from "@mantine/core";
-import classes from './LogoName.module.css'
+import { Group, Title, Image } from '@mantine/core';
+import classes from './LogoName.module.css';
+import logoIcon from './icon.png';
+
 const LogoName = () => (
-    <Group>
-        <Image src="./icon.png" alt="logo" width={60} height={60} />
-        <Title className={classes.brandName}>iMedia</Title>
-    </Group>
+  <Group>
+    <Image src={logoIcon.src} alt="logo" width={60} height={60} />
+    <Title className={classes.brandName}>iMedia</Title>
+  </Group>
 );
 
 export default LogoName;

@@ -1,23 +1,28 @@
-import Link from 'next/link';
 import {
-  AppShell,
-  Container,
   Group,
-  RemoveScroll,
   Title,
   Image,
-  BackgroundImage,
-  Space,
   rem,
-  ActionIcon,
+  AppShell,
+  Container,
+  RemoveScroll,
+  BackgroundImage,
+  Burger,
+  Transition,
+  Paper,
 } from '@mantine/core';
-import { IconBrandInstagram, IconBrandTwitter, IconBrandYoutube } from '@tabler/icons-react';
+
+import Link from 'next/link';
+
+import { useDisclosure } from '@mantine/hooks';
 import classes from './Shell.module.css';
+
 import { links } from '@/iMedia/utils/conts';
 import bgImage from '@/iMedia/resources/imgs/background.png';
 import { Footer } from '../Footer/Footer';
+import LogoName from '../LogoName/LogoName';
 
-interface ShellProps {
+export interface ShellProps {
   children: React.ReactNode;
   headerHeight?: number;
 }
@@ -26,8 +31,8 @@ interface NavItemProps {
   links: { link: string; label: string }[];
 }
 
-const NavItem = ({ links }: NavItemProps) => {
-  const items = links.map((link) => (
+const itemLinks = (linksData: { link: string; label: string }[]) =>
+  linksData.map((link) => (
     <a
       key={link.label}
       href={link.link}
@@ -40,21 +45,14 @@ const NavItem = ({ links }: NavItemProps) => {
     </a>
   ));
 
-  return (
-    <Group gap={5} visibleFrom="xs">
-      {items}
-    </Group>
-  );
-};
-
-const LogoName = () => (
-  <Group>
-    <Image src="./icon.png" alt="logo" width={60} height={60} />
-    <Title className={classes.brandName}>iMedia</Title>
+export const NavItem = ({ links: linksData }: NavItemProps) => (
+  <Group gap={5} visibleFrom="xs">
+    {itemLinks(linksData)}
   </Group>
 );
 
 export function Shell({ children, headerHeight = 60 }: ShellProps) {
+  const [opened, { toggle }] = useDisclosure(false);
   return (
     <AppShell header={{ height: headerHeight }}>
       <AppShell.Header className={RemoveScroll.classNames.zeroRight}>
@@ -63,6 +61,18 @@ export function Shell({ children, headerHeight = 60 }: ShellProps) {
             <LogoName />
           </Link>
           <NavItem links={links} />
+          <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
+          <Transition transition="pop-top-right" duration={200} mounted={opened}>
+            {(styles) => (
+              <Paper
+                className={classes.dropDown}
+                withBorder
+                style={[styles, { top: headerHeight }]}
+              >
+                {itemLinks(links)}
+              </Paper>
+            )}
+          </Transition>
         </Container>
       </AppShell.Header>
       <BackgroundImage src={bgImage.src}>
@@ -70,10 +80,7 @@ export function Shell({ children, headerHeight = 60 }: ShellProps) {
           <div className={classes.main}>{children}</div>
         </AppShell.Main>
       </BackgroundImage>
-      <Container>
-        <Footer />
-        {/* <Space h={rem(200)} style={{zIndex: 0, pointerEvents: 'none'}}/> */}
-      </Container>
+      <Footer />
     </AppShell>
   );
 }

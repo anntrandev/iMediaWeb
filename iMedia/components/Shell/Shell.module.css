@@ -33,9 +33,20 @@
 
 .main {
     padding-bottom: rem(120px);
+    z-index: 2;
 }
 
 .link {
     text-decoration: none;
 }
 
+.space {
+    height: rem(200px);
+}
+
+.dropDown {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}

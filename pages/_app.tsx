@@ -8,8 +8,11 @@ import '@mantine/ds/styles.css';
 import Head from 'next/head';
 import { MantineProvider, DirectionProvider, localStorageColorSchemeManager } from '@mantine/core';
 import { theme } from '../theme';
+import AppContext from '@/iMedia/context/AppContext';
+import useLoadConfig from '@/iMedia/components/HomePage/useLoadConfig';
 
 export default function App({ Component, pageProps }: any) {
+  const { configData } = useLoadConfig();
   return (
     <>
       <Head>
@@ -35,7 +38,9 @@ export default function App({ Component, pageProps }: any) {
           defaultColorScheme="auto"
           colorSchemeManager={localStorageColorSchemeManager({ key: 'mantine-ui-color-scheme' })}
         >
-          <Component {...pageProps} />
+          <AppContext.Provider value={{ configData }}>
+            <Component {...pageProps} />
+          </AppContext.Provider>
         </MantineProvider>
       </DirectionProvider>
     </>
