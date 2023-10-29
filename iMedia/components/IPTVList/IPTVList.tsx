@@ -1,8 +1,8 @@
 import { Container, Paper, Text, List, Title, SimpleGrid, Group } from '@mantine/core';
 import { useContext, useMemo } from 'react';
 import classes from './IPTVList.module.css';
-import { ButtonCopy } from '@/lib';
 import AppContext from '@/iMedia/context/AppContext';
+import { ButtonCopy } from '../ButtonCopy/ButtonCopy';
 
 const IPTVCard = ({ title, content = [] }: { title: string; content: string[] }) => (
   <Paper withBorder radius="md" className={classes.card}>

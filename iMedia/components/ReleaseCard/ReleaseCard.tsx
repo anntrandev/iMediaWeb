@@ -1,5 +1,7 @@
 import { Card, Image, Text, Group, Button, Title, rem } from '@mantine/core';
 import Link from 'next/link';
+import { useCallback } from 'react';
+import { useRouter } from 'next/router';
 import classes from './ReleaseCard.module.css';
 
 function GooglePlayButton({ href }: { href: string }) {
@@ -20,6 +22,7 @@ interface IReleaseData {
   linkGG: string;
   descriptionAPK: string;
   linkAPK: string;
+  type: string;
 }
 
 interface ReleaseCardProps {
@@ -27,7 +30,11 @@ interface ReleaseCardProps {
 }
 
 export function ReleaseCard({ data }: ReleaseCardProps) {
-  const { title, descriptionGG, linkGG } = data;
+  const { title, descriptionGG, linkGG, type } = data;
+  const router = useRouter();
+  const onClickDownload = useCallback(() => {
+    router.push(`/${type}`);
+  }, []);
   return (
     <Card withBorder radius="md" p="md" className={classes.card}>
       <Card.Section className={classes.section} mt="md">
@@ -56,6 +63,7 @@ export function ReleaseCard({ data }: ReleaseCardProps) {
           radius="md"
           style={{ flex: 1, minWidth: '50%', width: rem(100) }}
           mt="sm"
+          onClick={onClickDownload}
         >
           Tải về APK
         </Button>

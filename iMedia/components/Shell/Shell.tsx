@@ -1,8 +1,5 @@
 import {
   Group,
-  Title,
-  Image,
-  rem,
   AppShell,
   Container,
   RemoveScroll,

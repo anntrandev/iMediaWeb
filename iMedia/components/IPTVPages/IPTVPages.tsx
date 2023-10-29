@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { Container, Title } from '@mantine/core';
 import { Shell } from '../Shell/Shell';
 
 import { IPTVList } from '../IPTVList/IPTVList';

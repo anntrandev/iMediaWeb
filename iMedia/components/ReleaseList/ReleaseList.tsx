@@ -19,6 +19,7 @@ export function ReleaseList() {
         linkGG: v.linkGG,
         linkAPK: v.linkAPK,
         version: v.version,
+        type: v.type,
       })) || [];
     setData(mappedData);
   }, [configData]);
